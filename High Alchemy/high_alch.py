@@ -40,23 +40,25 @@ class HighAlch(object):
 
     def clicker(self):
         while self.x_val and self.y_val and running:
+            #DANGER: DO NOT remove "and running" as tehre would be no means to test the script
             #find extremeties with pixel depth for square corners
             print(f"x pos: {self.x_val}, y pos: {self.y_val}")
-            '''
+
+            #has not been tested for accuracy yet
             self.x_val = self.x_val+random.randrange(-2, 2)
             self.y_val = self.y_val+random.randrange(-2, 2)
-            '''
 
             #optimize this for most consistent results
             #may need more than two delays for it to be consitent
             magic_menu_delay = random.uniform(.2, .5)
             norm_inv_delay = random.uniform(1.9, 2.2)
 
-            pg.click(x=self.x_val, y=self.y_val) # --> This leads to problems, as it resets to original position every half seconds messing up
+            pg.moveTo(x=self.x_val, y=self.y_val, duration=0.1, tween=pg.easeInQuad)
+            pg.click() # --> This leads to problems, as it resets to original position every half seconds messing up
             print(f"Magic Menu Delay: {magic_menu_delay}")
             sleep(magic_menu_delay)
 
-            pg.click(x=self.x_val, y=self.y_val) # --> Also leads to problems, shuld not be implemented during testing.
+            pg.click() # --> Also leads to problems, shuld not be implemented during testing.
             print(f"Inventory Delay: {norm_inv_delay}")
             sleep(norm_inv_delay)
 
