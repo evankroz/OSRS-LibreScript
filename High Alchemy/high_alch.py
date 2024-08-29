@@ -3,8 +3,6 @@ from time import sleep
 from tqdm import tqdm
 from pynput import keyboard
 import random
-import time
-
 
 '''
 DONE: esc is now the global hotkey to exit the script
@@ -30,6 +28,7 @@ class HighAlch(object):
             print("Please Manually Place Your Cursor on High Alchemy Spell")
         self.x_val = 0
         self.y_val = 0
+
         '''
         self.top_left_square_x, self.top_left_square_y = (self.x_val - 2, self.y_val - 2)
         self.top_right_square_x, self.top_right_square_y = (self.x_val + 2, self.y_val - 2)
@@ -40,12 +39,12 @@ class HighAlch(object):
     def clicker(self):
         while self.x_val and self.y_val and running:
             #DANGER: DO NOT remove "and running" as tehre would be no means to test the script
-            #find extremeties with pixel depth for square corners
+
             print(f"x pos: {self.x_val}, y pos: {self.y_val}")
 
             #has not been tested for accuracy yet
-            local_x_val = self.x_val+random.randrange(-2, 2)
-            local_y_val = self.y_val+random.randrange(-2, 2)
+            local_x_val = self.x_val+random.randrange(-3, 3)
+            local_y_val = self.y_val+random.randrange(-3, 3)
 
             #optimize this for most consistent results
             #may need more than two delays for it to be consitent
@@ -53,11 +52,11 @@ class HighAlch(object):
             norm_inv_delay = random.uniform(1.9, 2.2)
 
             pg.moveTo(x=local_x_val, y=local_y_val, duration=0.3, tween=pg.easeInQuad)
-            pg.click() # --> This leads to problems, as it resets to original position every half seconds messing up
+            pg.click()
             print(f"Magic Menu Delay: {magic_menu_delay}")
             sleep(magic_menu_delay)
 
-            pg.click() # --> Also leads to problems, shuld not be implemented during testing.
+            pg.click()
             print(f"Inventory Delay: {norm_inv_delay}")
             sleep(norm_inv_delay)
 
