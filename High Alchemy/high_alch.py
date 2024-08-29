@@ -11,7 +11,7 @@ DONE: esc is now the global hotkey to exit the script
 TODO: Consistency issues with delay, pg.locateOnScreen() is not working? --> Not important
 TODO: Store cords in tuple, ex: self.top_left = (self.x_val-2, self.y_val-2) --> Not important
 TODO: Create a function in class HighAlch that finds valid points to click on to avoid ban --> In development
-TODO: Set mouse position cursor based on location of spell.png?
+TODO: Set mouse position cursor based on location of spell.png? --> unknown fix, package broken
 TODO: Find a way to move my cursor with ease in function from pg, and click
 NOTES: 1) Make sure cursor position is captured once at the start of the script
        2) Create a seperate function for clicking? 
@@ -23,14 +23,13 @@ class HighAlch(object):
         #capturing the initial mouse cursor position
         #and evaluating corners for harder detection by anti-ban
         #corners are the farthest the mouse should be allowed to move
-
         try:
             self.magic_location = pg.locateOnScreen(image="assets/spell.png")
         except pg.ImageNotFoundException:
             print("Image Not Found")
             print("Please Manually Place Your Cursor on High Alchemy Spell")
-
-        self.x_val, self.y_val = pg.position()
+        self.x_val = 0
+        self.y_val = 0
         '''
         self.top_left_square_x, self.top_left_square_y = (self.x_val - 2, self.y_val - 2)
         self.top_right_square_x, self.top_right_square_y = (self.x_val + 2, self.y_val - 2)
@@ -45,15 +44,15 @@ class HighAlch(object):
             print(f"x pos: {self.x_val}, y pos: {self.y_val}")
 
             #has not been tested for accuracy yet
-            self.x_val = self.x_val+random.randrange(-2, 2)
-            self.y_val = self.y_val+random.randrange(-2, 2)
+            local_x_val = self.x_val+random.randrange(-2, 2)
+            local_y_val = self.y_val+random.randrange(-2, 2)
 
             #optimize this for most consistent results
             #may need more than two delays for it to be consitent
             magic_menu_delay = random.uniform(.2, .5)
             norm_inv_delay = random.uniform(1.9, 2.2)
 
-            pg.moveTo(x=self.x_val, y=self.y_val, duration=0.1, tween=pg.easeInQuad)
+            pg.moveTo(x=local_x_val, y=local_y_val, duration=0.3, tween=pg.easeInQuad)
             pg.click() # --> This leads to problems, as it resets to original position every half seconds messing up
             print(f"Magic Menu Delay: {magic_menu_delay}")
             sleep(magic_menu_delay)
@@ -62,18 +61,19 @@ class HighAlch(object):
             print(f"Inventory Delay: {norm_inv_delay}")
             sleep(norm_inv_delay)
 
-    @staticmethod
-    def start():
+    def start(self):
         print("Program booting up...")
         #loading bar for 10 seconds, not essential
-        for i in tqdm(range(5)):
+        for _ in tqdm(range(5)):
             sleep(1)
         inp = input("Are you ready to begin program? Y/N")
         if inp.capitalize() == "Y":
             print("Loading dependencies...")
             print("Program starting, be ready, have cursor on high alchemy spell in magic tab")
-            for i in tqdm(range(5)):
+            for _ in tqdm(range(5)):
                 sleep(1)
+            self.x_val, self.y_val = pg.position() #--> function should be a static method, but this prevents
+
             print("Program has begun")
         else:
             print("Alright, Good Morning, Good Afternoon, Good Evening, and Good Night")
