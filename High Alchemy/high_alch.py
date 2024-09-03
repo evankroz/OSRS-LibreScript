@@ -40,18 +40,19 @@ class HighAlch(object):
         while self.x_val and self.y_val and running:
             #DANGER: DO NOT remove "and running" as tehre would be no means to test the script
 
-            print(f"x pos: {self.x_val}, y pos: {self.y_val}")
-
-            #has not been tested for accuracy yet
+            #this is for 27 inch monitor, 2k
             local_x_val = self.x_val+random.randrange(-3, 3)
             local_y_val = self.y_val+random.randrange(-3, 3)
 
-            #optimize this for most consistent results
-            #may need more than two delays for it to be consitent
+            #laptop, screen
+           # local_x_val = self.x_val + random.randrange(-1, 1)
+           # local_y_val = self.y_val + random.randrange(-1, 1)
+
             magic_menu_delay = random.uniform(.2, .5)
             norm_inv_delay = random.uniform(1.9, 2.2)
 
             pg.moveTo(x=local_x_val, y=local_y_val, duration=0.3, tween=pg.easeInQuad)
+            print(f"x pos: {local_x_val}, y pos: {local_y_val}")
             pg.click()
             print(f"Magic Menu Delay: {magic_menu_delay}")
             sleep(magic_menu_delay)
