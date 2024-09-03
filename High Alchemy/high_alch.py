@@ -14,7 +14,7 @@ class HighAlch(object):
     def __init__(self):
         #isnt consistent at all, rarely actually detects, something wrong with library?
         try:
-            self.magic_location = pg.locateOnScreen(image="assets/spell.png")
+            self.magic_location = pg.locateOnScreen(image="spell.png", confidence=0.8)
         except pg.ImageNotFoundException:
             print("Image Not Found")
             print("Please Manually Place Your Cursor on High Alchemy Spell")
