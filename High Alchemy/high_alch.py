@@ -13,12 +13,13 @@ NOTE: Make sure cursor position is captured once at the start of the script
 class HighAlch(object):
     def __init__(self):
         #isnt consistent at all, rarely actually detects, something wrong with library?
+        '''
         try:
             self.magic_location = pg.locateOnScreen(image="spell.png", confidence=0.8)
         except pg.ImageNotFoundException:
             print("Image Not Found")
             print("Please Manually Place Your Cursor on High Alchemy Spell")
-
+        '''
         #initialiazes x and y values for cursor
         self.x_val = 0
         self.y_val = 0
@@ -103,5 +104,5 @@ if __name__ == "__main__":
             main.clicker()
     except KeyboardInterrupt:
         print("Program interrupted")
-    print("Program Stopped")
+    print("Program Terminated")
 
