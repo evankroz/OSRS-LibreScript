@@ -18,7 +18,7 @@ class HighAlch(object):
             self.magic_location = pg.locateOnScreen(image="spell.png", confidence=0.8)
         except pg.ImageNotFoundException:
             print("Image Not Found")
-            print("Please Manually Place Your Cursor on High Alchemy Spell")
+            print("Please Manually Place Your Cursor on HighAlchemy Spell")
         '''
         #initialiazes x and y values for cursor
         self.x_val = 0
