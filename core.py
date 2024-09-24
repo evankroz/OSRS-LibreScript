@@ -6,8 +6,12 @@ logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
                     level=logging.DEBUG)
 
 
-window_name = "RuneLite - PureBerr"
-def get_active_window_info(window_name):
+class WinInfo():
+    def __init__(self):
+        self.username = "RuneLite - PureBerr"
+
+
+def get_win_info(username):
 
     # Get information about all windows
     windows = CGWindowListCopyWindowInfo(kCGWindowListOptionOnScreenOnly, kCGNullWindowID)
@@ -19,29 +23,26 @@ def get_active_window_info(window_name):
 
         if window_n:
             window_names.append(window_n)
-    print(window_names)
+    #print(window_names)
 
 
     # Find the  window
     for window in windows:
-        if window['kCGWindowName'] == window_name:
+        if window['kCGWindowName'] == f"RuneLite - {username}":
             # Get window dimensions
             bounds = window['kCGWindowBounds']
             width = bounds['Width']
             height = bounds['Height']
 
-            return {
-                'name': window_name,
-                'width': width,
-                'height': height
-            }
+            return width, height
 
     # If no matching window found
     else:
-        return ("Window not found")
+        print("Window not found, exiting code")
+        quit()
 
 
+#username = "PureBerr"
 # Get and print the active window information
-window_info = get_active_window_info(window_name)
-print(f"Window: {window_info['name']}")
-print(f"Window dimensions: {window_info['width']} x {window_info['height']}")
+#window_info = get_win_info(username)
+#print(f"Window dimensions: {window_info[0], window_info[1]}")

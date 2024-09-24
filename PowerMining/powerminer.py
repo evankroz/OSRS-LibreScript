@@ -4,6 +4,7 @@ from tqdm import tqdm
 from pynput import keyboard
 import random
 import PIL.ImageGrab
+from core import get_win_info
 
 '''
 TODO:create main skeleton for script
@@ -16,6 +17,8 @@ class PowerMiner(object):
     def __init__(self):
 
         #if self.inventory_full == False, then inventory can handle more
+        self.username = "PureBerr"  # -> change this depending on your osrs username in-game
+        self.screen_size = get_win_info(self.username)
         self.ore_locate = (0, 0)
         self.inventory_full = False
         self.color = (256, 0, 0)
@@ -32,7 +35,9 @@ class PowerMiner(object):
             pass
         pass
 
-    
+    def screen(self):
+        return self.screen_size
+
     def ore_dropper(self):
         pass
         '''
@@ -48,8 +53,5 @@ class PowerMiner(object):
         pass
 
 
-if __name__ == "__main__":
-    miner = PowerMiner()
-
-    miner.miner()
-    miner.ore_dropper()
+miner = PowerMiner()
+print(f"{miner.screen()[0]}, {miner.screen()[1]}")

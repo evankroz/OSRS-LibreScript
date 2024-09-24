@@ -3,7 +3,7 @@ from time import sleep
 from tqdm import tqdm
 from pynput import keyboard
 import random
-
+from core import get_win_info
 '''
 NOTE: ESC is the hotkey to terminate the script, do not try and stop manually
 NOTE: Make sure cursor position is captured once at the start of the script
@@ -13,6 +13,7 @@ NOTE: Make sure cursor position is captured once at the start of the script
 class HighAlch(object):
     def __init__(self):
         #isnt consistent at all, rarely actually detects, something wrong with library?
+        # TODO: Will implement core.py into this making it more optimal and better success rate
         '''
         try:
             self.magic_location = pg.locateOnScreen(image="spell.png", confidence=0.8)
