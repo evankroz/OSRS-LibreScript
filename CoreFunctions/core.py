@@ -3,12 +3,10 @@ from AppKit import NSWorkspace
 from Quartz import CGWindowListCopyWindowInfo, kCGWindowListOptionOnScreenOnly, kCGNullWindowID
 
 logging.basicConfig(format='%(asctime)s %(levelname)s %(message)s',
-                    level=logging.DEBUG)
-
-
+                   level=logging.DEBUG)
 class WinInfo():
-    def __init__(self):
-        self.username = "RuneLite - PureBerr"
+    def __init__(self, username):
+        self.username = f"RuneLite - {username}"
 
 
 def get_win_info(username):
@@ -29,12 +27,15 @@ def get_win_info(username):
     # Find the  window
     for window in windows:
         if window['kCGWindowName'] == f"RuneLite - {username}":
+            #print(window)
             # Get window dimensions
             bounds = window['kCGWindowBounds']
-            width = bounds['Width']
-            height = bounds['Height']
+            x = int(bounds["X"])
+            y = int(bounds["Y"])
+            width = int(bounds['Width'])
+            height = int(bounds['Height'])
 
-            return width, height
+            return (x, y, width, height)
 
     # If no matching window found
     else:
@@ -42,7 +43,7 @@ def get_win_info(username):
         quit()
 
 
-#username = "PureBerr"
+username = "PureBerr"
 # Get and print the active window information
-#window_info = get_win_info(username)
-#print(f"Window dimensions: {window_info[0], window_info[1]}")
+window_info = get_win_info(username)
+print(f"Window dimensions: {window_info[0], window_info[1], window_info[2], window_info[3]}")

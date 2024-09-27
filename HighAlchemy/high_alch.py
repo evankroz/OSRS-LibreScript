@@ -3,25 +3,30 @@ from time import sleep
 from tqdm import tqdm
 from pynput import keyboard
 import random
-from core import get_win_info
+from CoreFunctions.core import get_win_info
+import cv2
+
 '''
 NOTE: ESC is the hotkey to terminate the script, do not try and stop manually
 NOTE: Make sure cursor position is captured once at the start of the script
+NOTE: PyAutoGui has a failsafe feature, if you get your mouse to any of the 4 corners of the screen
+the failsafe will activiate the program will be disabled, just in case if ESC does not work.
 '''
 
 
 class HighAlch(object):
     def __init__(self):
         #isnt consistent at all, rarely actually detects, something wrong with library?
-        # TODO: Will implement core.py into this making it more optimal and better success rate
-        '''
+        # TODO: Use coordinates given by function to
+
         try:
-            self.magic_location = pg.locateOnScreen(image="spell.png", confidence=0.8)
+            self.magic_location = pg.locateOnScreen(image="assets/spell.png", minSearchTime=10, region=(get_win_info("PureBerr")), confidence=1)
+            print(self.magic_location)
         except pg.ImageNotFoundException:
             print("Image Not Found")
             print("Please Manually Place Your Cursor on HighAlchemy Spell")
-        '''
-        #initialiazes x and y values for cursor
+
+        #initialiazes x and y values for cursor, implement
         self.x_val = 0
         self.y_val = 0
 
@@ -75,7 +80,7 @@ class HighAlch(object):
 
             print("Program has begun")
         else:
-            print("Alright, Good Morning, Good Afternoon, Good Evening, and Good Night")
+            print("")
             print("Application Quit")
 
 
@@ -104,6 +109,6 @@ if __name__ == "__main__":
             main.start()
             main.clicker()
     except KeyboardInterrupt:
-        print("Program interrupted")
+        print("Program Interrupted")
     print("Program Terminated")
 
