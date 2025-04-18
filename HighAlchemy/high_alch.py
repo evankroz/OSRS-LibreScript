@@ -4,7 +4,7 @@ from tqdm import tqdm
 from pynput import keyboard
 import random
 from CoreFunctions.core import get_win_info
-import cv2
+
 
 '''
 NOTE: ESC is the hotkey to terminate the script, do not try and stop manually
