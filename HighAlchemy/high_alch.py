@@ -3,7 +3,7 @@ from time import sleep
 from tqdm import tqdm
 from pynput import keyboard
 import random
-from CoreFunctions.core import get_win_info
+#from CoreFunctions.core import get_win_info
 
 
 '''
@@ -18,14 +18,14 @@ class HighAlch(object):
     def __init__(self):
         #isnt consistent at all, rarely actually detects, something wrong with library?
         # TODO: Use coordinates given by function to
-
+        '''
         try:
             self.magic_location = pg.locateOnScreen(image="assets/spell.png", minSearchTime=10, region=(get_win_info("PureBerr")), confidence=1)
             print(self.magic_location)
         except pg.ImageNotFoundException:
             print("Image Not Found")
             print("Please Manually Place Your Cursor on HighAlchemy Spell")
-
+        '''
         #initialiazes x and y values for cursor, implement
         self.x_val = 0
         self.y_val = 0
