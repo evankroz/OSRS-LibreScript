@@ -3,8 +3,6 @@ from time import sleep
 from tqdm import tqdm
 from pynput import keyboard
 import random
-#from CoreFunctions.core import get_win_info
-
 
 '''
 NOTE: ESC is the hotkey to terminate the script, do not try and stop manually
@@ -16,44 +14,30 @@ the failsafe will activiate the program will be disabled, just in case if ESC do
 
 class HighAlch(object):
     def __init__(self):
-        #isnt consistent at all, rarely actually detects, something wrong with library?
-        # TODO: Use coordinates given by function to
-        '''
-        try:
-            self.magic_location = pg.locateOnScreen(image="assets/spell.png", minSearchTime=10, region=(get_win_info("PureBerr")), confidence=1)
+
+        """try:
+            self.magic_location = pg.locateOnScreen(image="assets/spell.png", minSearchTime=10, region=(get_win_info()), confidence=1)
             print(self.magic_location)
         except pg.ImageNotFoundException:
             print("Image Not Found")
-            print("Please Manually Place Your Cursor on HighAlchemy Spell")
-        '''
-        #initialiazes x and y values for cursor, implement
+            print("Please Manually Place Your Cursor on HighAlchemy Spell")"""
+
         self.x_val = 0
         self.y_val = 0
 
-        '''
-        self.top_left_square_x, self.top_left_square_y = (self.x_val - 2, self.y_val - 2)
-        self.top_right_square_x, self.top_right_square_y = (self.x_val + 2, self.y_val - 2)
-        self.bottom_left_square_x, self.bottom_left_square_y = (self.x_val + 2, self.y_val + 2)
-        self.bottom_right_square_x, self.bottom_right_square_y = (self.x_val - 2, self.y_val + 2)
-        '''
-
     def clicker(self):
-        #while points are available to click on, and running = True, run the loop
+        # while points are available to click on, and running = True, run the loop
         while self.x_val and self.y_val and running:
-            #DANGER: DO NOT remove "and running" as tehre would be no means to test the script
+            # DANGER: DO NOT remove "and running" as there would be no means to stop the script
 
-            #works for 27 inch monitor, 2k
+            # works for 27 inch monitor, 2k
             local_x_val = self.x_val+random.randrange(-3, 3)
             local_y_val = self.y_val+random.randrange(-3, 3)
 
-            #laptop, screen
-           # local_x_val = self.x_val + random.randrange(-1, 1)
-           # local_y_val = self.y_val + random.randrange(-1, 1)
-
             magic_menu_delay = random.uniform(.2, .5)
-            norm_inv_delay = random.uniform(1.9, 2.2)
+            norm_inv_delay = random.uniform(1.65, 1.95)
 
-            #magic delay and moving functions for mouse
+            # magic delay and moving functions for mouse
 
             pg.moveTo(x=local_x_val, y=local_y_val, duration=0.3, tween=pg.easeInQuad)
             print(f"x pos: {local_x_val}, y pos: {local_y_val}")
@@ -65,7 +49,6 @@ class HighAlch(object):
             print(f"Inventory Delay: {norm_inv_delay}")
             sleep(norm_inv_delay)
 
-    #styalized functions for cool-points
     def start(self):
         print("Program booting up...")
         for _ in tqdm(range(5)):
@@ -76,7 +59,7 @@ class HighAlch(object):
             print("Program starting, be ready, have cursor on high alchemy spell in magic tab")
             for _ in tqdm(range(5)):
                 sleep(1)
-            self.x_val, self.y_val = pg.position() #--> initializes mouse coordinates once user has mouse already on high alch spell
+            self.x_val, self.y_val = pg.position()
 
             print("Program has begun")
         else:
@@ -97,7 +80,7 @@ def on_press(key):
     except AttributeError:
         pass
 
-
+# Expected type '(Key | KeyCode | None) -> None | None', got '(key: {__eq__}) -> bool' instead?
 listener = keyboard.Listener(on_press=on_press)
 listener.start()
 
@@ -111,4 +94,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("Program Interrupted")
     print("Program Terminated")
-
+    
