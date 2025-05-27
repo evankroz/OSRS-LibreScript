@@ -1,6 +1,7 @@
 import pyautogui as pg
 from CoreFunctions.core import get_win_info
 
+
 '''
 TODO:create main skeleton for script
 TODO:find pixel color sorting library for python or build own for challenge?
